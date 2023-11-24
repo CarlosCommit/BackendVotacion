@@ -36,16 +36,17 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException{
 
-        if (request.getRequestURI().equals("/signup") || request.getRequestURI().equals("/auth/login")) {
+        if (request.getRequestURI().equals("/signup") || request.getRequestURI().equals("/auth/login")  ||request.getRequestURI().equals("/votacion/candidatos") ) {
             filterChain.doFilter(request, response);
         }else
         {
             //TODO: REEMPLAZAR POR UN ENTRY POINT Y ASOSCIARLOS A LOS HANDLER EXCEPTIONS, NO HACER TRY CATCH
             try {
+
             String authorizationHeader = request.getHeader("Authorization");
             String token = null;
 
-            if(authorizationHeader!=null && authorizationHeader.startsWith("Bearer "))
+            if((authorizationHeader!=null)  && authorizationHeader.startsWith("Bearer "))
             {
                 token = authorizationHeader.substring(7);
                 email = jwtUtil.extractUsername(token);
@@ -72,6 +73,15 @@ public class JwtFilter extends OncePerRequestFilter {
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 ApiResponse apiResponse = new ApiResponse();
                 apiResponse.setError(jwtException.getMessage());
+                apiResponse.setStatus(response.getStatus());
+                response.getWriter().write(objectMapper.writeValueAsString(apiResponse));
+            }catch (IllegalArgumentException e)
+            {
+                ObjectMapper objectMapper = new ObjectMapper();
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                ApiResponse apiResponse = new ApiResponse();
+                apiResponse.setError("El acceso esta prohibido se necesita un token");
                 apiResponse.setStatus(response.getStatus());
                 response.getWriter().write(objectMapper.writeValueAsString(apiResponse));
             }

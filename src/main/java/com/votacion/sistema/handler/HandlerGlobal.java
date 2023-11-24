@@ -2,6 +2,8 @@ package com.votacion.sistema.handler;
 
 import com.votacion.sistema.dto.response.ApiResponse;
 import com.votacion.sistema.exception.RegisterDuplicated;
+import com.votacion.sistema.exception.RegisterNotFound;
+import com.votacion.sistema.exception.VoteUsed;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,18 @@ public class HandlerGlobal {
     }
     @ExceptionHandler(value = RegisterDuplicated.class)
     public ResponseEntity<ApiResponse> handleRegistredDuplicated( RegisterDuplicated e)
+    {
+        return generateApiResponseError(e.getMessage(), e);
+
+    }
+    @ExceptionHandler(value = RegisterNotFound.class)
+    public ResponseEntity<ApiResponse> handleRegistredNotFound( RegisterNotFound e)
+    {
+        return generateApiResponseError(e.getMessage(), e);
+
+    }
+    @ExceptionHandler(value = VoteUsed.class)
+    public ResponseEntity<ApiResponse> handleVoteUsed( VoteUsed e)
     {
         return generateApiResponseError(e.getMessage(), e);
 

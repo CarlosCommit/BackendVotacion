@@ -20,4 +20,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Role rol;
+    @ManyToOne
+    private Candidato candidato;
 }
