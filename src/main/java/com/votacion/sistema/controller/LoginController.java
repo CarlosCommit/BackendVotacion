@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth/login")
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-//qwewqewq
+//qwewqewqqwqeqw
 public class LoginController {
     private final AuthService authService;
 
