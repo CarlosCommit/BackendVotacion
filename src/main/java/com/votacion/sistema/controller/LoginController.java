@@ -12,14 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth/login")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+
 public class LoginController {
     private final AuthService authService;
 
@@ -34,6 +33,7 @@ public class LoginController {
         userDTO.setEmail(userLoguedDTO.getEmail());
         userDTO.setCandidado(userLoguedDTO.getCandidato());
         userDTO.setVoto(userLoguedDTO.isVoto());
+        userDTO.setToken(token);
        ApiResponse apiResponse = new ApiResponse();
        apiResponse.setStatus(0);
        apiResponse.setPayload(userDTO);

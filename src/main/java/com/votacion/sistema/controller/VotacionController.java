@@ -20,6 +20,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/votacion")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @AllArgsConstructor
 public class VotacionController {
 
@@ -55,8 +56,8 @@ public class VotacionController {
     {
         User user = userDetailsServiceCustom.getUserDetail();
         System.out.println(user.getUsername());
-        if(user.getCandidato()!=null)
-             throw new VoteUsed("El usuario ya voto");
+        //if(user.getCandidato()!=null)
+        //     throw new VoteUsed("El usuario ya voto");
         votacionService.votarCandidato(candidatoDTO,user);
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setStatus(0);

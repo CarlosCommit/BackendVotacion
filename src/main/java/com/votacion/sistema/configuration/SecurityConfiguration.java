@@ -43,10 +43,10 @@ public class SecurityConfiguration {
     {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.disable())
                 .authorizeHttpRequests( authorize -> authorize
                         .requestMatchers("/auth/login", "/signup","/votacion/candidatos").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .securityContext((context) -> context
                         .securityContextRepository(new NullSecurityContextRepository())
                 )

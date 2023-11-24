@@ -12,4 +12,5 @@ public class UserDTO implements Serializable {
     private String email;
     private boolean voto;
     private String candidado;
+    private String token;
 }
