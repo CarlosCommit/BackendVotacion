@@ -20,7 +20,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/votacion")
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @AllArgsConstructor
 public class VotacionController {
 

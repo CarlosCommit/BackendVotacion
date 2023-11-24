@@ -26,7 +26,7 @@ import java.awt.font.ShapeGraphicAttribute;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/signup")
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 
 @Slf4j
 public class SignUpController {
