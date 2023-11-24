@@ -11,6 +11,7 @@ import com.votacion.sistema.security.service.UserDetailsServiceCustom;
 import com.votacion.sistema.service.VotacionService;
 import com.votacion.sistema.util.Constants;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class VotacionController {
     }
 
     @PostMapping("/votar")
-    public ApiResponse votar(HttpServletResponse response, @RequestBody CandidatoDTO candidatoDTO, Principal principal)
+    public ApiResponse votar(HttpServletResponse response, @Valid @RequestBody CandidatoDTO candidatoDTO, Principal principal)
     {
         User user = userDetailsServiceCustom.getUserDetail();
         System.out.println(user.getUsername());

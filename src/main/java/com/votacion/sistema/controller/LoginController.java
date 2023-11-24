@@ -9,6 +9,7 @@ import com.votacion.sistema.security.service.UserDetailsServiceCustom;
 import com.votacion.sistema.service.AuthService;
 import com.votacion.sistema.util.Constants;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class LoginController {
     private final AuthService authService;
 
     @PostMapping
-    public ApiResponse login(HttpServletResponse response,@RequestBody LoginDTO credentials)
+    public ApiResponse login(HttpServletResponse response,@Valid @RequestBody LoginDTO credentials)
     {
         UserLoguedDTO userLoguedDTO =  authService.login(credentials);
         String token = userLoguedDTO.getToken();

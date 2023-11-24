@@ -12,6 +12,7 @@ import com.votacion.sistema.service.AuthService;
 import com.votacion.sistema.service.SignUpService;
 import com.votacion.sistema.util.Constants;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
@@ -34,7 +35,7 @@ public class SignUpController {
     private final SignUpService signUpService;
     private final JwtUtils jwtUtils;
     @PostMapping
-    public ApiResponse signup(HttpServletResponse response, @RequestBody SignUpDTO signUpDTO)
+    public ApiResponse signup(HttpServletResponse response, @Valid @RequestBody SignUpDTO signUpDTO)
     {
 
         response.setStatus(HttpServletResponse.SC_OK);
